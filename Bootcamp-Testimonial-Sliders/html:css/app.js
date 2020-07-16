@@ -1,30 +1,49 @@
-const prevButton = document.querySelector('#prev');
-const nextButton = document.querySelector('#next');
+//student info
+const quote = document.getElementById('quote');
+const name = document.getElementById('name');
+const job = document.getElementById('job');
+const profilePhoto = document.getElementById('profilePhoto');
 
-const slide1 = document.querySelector('slide1');
-const slide2 = document.querySelector('slide2');
+const allStudents = [
+    {
+        name: 'Tanya Sinclair',
+        quote: '“I’ve been interested in coding for a while but never taken the jump, until now. I couldn’t recommend this course enough. I’m now in the job of my dreams and so excited about the future.”',
+        job: 'UX Engineer',
+        profilePhoto: './images/image-tanya.jpg',
+    },
+    {
+        name: 'John Tarkpor',
+        quote: '“If you want to lay the best foundation possible I’d recommend taking this course. The depth the instructors go into is incredible. I now feel so confident about starting up as a professional developer.”',
+        job: 'Junior Front-end Developer',
+        profilePhoto: './images/image-john.jpg',
+    },
+];
 
-const totalSlides = [slide1, slide2];
-let currentSlide = 0;
+function whichStudent(num){
+    const student = allStudents[num];
+    profilePhoto.src = student.profilePhoto;
+    name.textContent = student.name;
+    job.textContent = student.job;
+    quote.textContent = student.quote;
+};
 
-prevButton.addEventListener('click', () => {
-    totalSlides[currentSlide].style.display = 'none';
-    currentSlide--;
-    if(currentSlide > 1){
-        currentSlide = 0;
-    } if(currentSlide = 0){
-        currentSlide = 1;
+//toggle icons
+let count = 0;
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+
+prev.addEventListener('click', () => {
+    count--;
+    if (count < 0) {
+        count = allStudents.length - 1;
     }
-    totalSlides[currentSlide].style.display = 'block'
+    whichStudent(count)
 })
 
-nextButton.addEventListener('click', () => {
-    totalSlides[currentSlide].style.display = 'none';
-    currentSlide++;
-    if(currentSlide > 1){
-        currentSlide = 0;
-    } if(currentSlide = 0){
-        currentSlide = 1;
+next.addEventListener('click', () => {
+    count++;
+    if (count >= allStudents.length) {
+        count = 0;
     }
-    totalSlides[currentSlide].style.display = 'block'
+    whichStudent(count)
 })

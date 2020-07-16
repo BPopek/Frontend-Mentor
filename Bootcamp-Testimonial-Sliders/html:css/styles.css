@@ -23,85 +23,116 @@ The designs were created to the following widths:
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-
-.slide {
+.container {
     position: relative;
-    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.layout {
+    display: grid;
+    grid-template-areas: 'navigation' 'student';
+    grid-template-rows: 350px 250px;
+    grid-gap: 50px;
+    padding: 30px;
+    margin: 5px 0 3px;
+}
+.student {
+    grid-area: student;
+    text-align: center;
+    font-size: 1px;
+    margin: 10px auto;
+    position: relative;
+}
+.navigation {
+    display: flex;
+    grid-area: navigation;
+    position: relative;
+    text-align: center;
+    justify-content: center;
 }
 .profilePhoto {
-    position: relative;
-    display: block;
-    margin: 25px auto 75px;
-    width: 60vw; 
+    margin: 35px 0 0;
     height: auto;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 3px 5px 15px 5px hsla(240, 37%, 20%, 0.075);
 }
 .buttons {
     position: absolute;
-    display: flex;
-    justify-content: space-between;
     z-index: 2;
-    margin: auto;
-    width: 50px;
-    height: auto;
+    display: inline-block;
+    bottom: -30px; 
+}
+.prev {
     background-color: #fff;
-    border: red solid 1px;
-    border-radius: 25px;
-    padding: 10px;
-    left: 0;
-    right: 0;
-    top: 56vh;
+    padding: 20px 25px 20px 20px;
+    cursor: pointer;
+    box-shadow: 3px 5px 15px 5px hsla(240, 37%, 20%, 0.075);
 }
-#prev {
-    width: 10px;
-    height: auto;
+.next {
+    background-color: #fff;
+    padding: 20px 20px 20px 25px;
+    cursor: pointer;
+    box-shadow: 15px 5px 15px 5px hsla(240, 37%, 20%, 0.075);
 }
-#next {
-    width: 10px;
-    height: auto;
+.buttons .prev {
+    border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;
+	margin-right: -2px;
+}
+.buttons .next {
+    border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;
+	margin-left: -2px;
+}
+.mainBackground {
+    position: absolute;
+    top: 0px;
+    z-index: -1;
 }
 .bgPattern {
-    position: absolute;
     width: 80vw;
-    height: auto;
-    top: 25px;
-    margin: 0 auto;
+    height: 380px;
     z-index: -1;
 }
 .bgCurve {
     position: absolute;
-    width: 75vw;
-    height: auto;
+    background-image: url(images/pattern-curve.svg);
+	background-repeat: no-repeat;
+	background-size: cover;
+    width: 100%;
+    height: 75px;
     z-index: -1;
-    bottom: 0;
+    bottom: 0 !important;  
     left: 0;
-}
-.bgQuote {
-    position: absolute;
-    /* display: block; */
-    /* justify-content: center;
-    align-items: center; */
-    margin: auto;
-    width: 10%;
-    height: auto;
-    z-index: -1;
-    padding: 0;
-    left: 0;
-    right: 0;
-    bottom: 47vh;
-}
-.slide2 {
-    display: none;
 }
 .quote {
     font-family: 'Inter';
+    display: flex;
     font-size: 19px;
     font-weight: 300;
     color: hsl(240, 38%, 20%);
-    width: 80%;
     text-align: center;
     margin: 25px auto;
+    padding: 0 50px;
     line-height: 1.4;
+    justify-content: center;
+}
+.quote::before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 50px;
+    width: 60px;
+    margin: auto;
+    background-image: url(./images/pattern-quotes.svg);
+    background-repeat: no-repeat;
+    /* background-size: 50px 60px; */
+    background-size: contain;
+    transform: translateY(-50%);
 }
 .name {
     position: relative;
@@ -112,20 +143,92 @@ The designs were created to the following widths:
     color: hsl(240, 38%, 20%);
     text-align: center;
     line-height: 1.4;
+    margin-bottom: 10px;
 }
 .job {
     font-family: 'Inter';
     font-size: 16px;
     font-weight: 500;
     color: hsl(240, 18%, 77%);
-    width: 80%;
     text-align: center;
     margin: 0 auto;
     line-height: 1.4;
     margin-bottom: 50px;
-
 }
 
-/* @media (min-width: 1440px) {
+@media only screen and (min-width: 900px) {
+    /* .container {
+        height: 100vh;
+    } */
+    .layout {
+        grid-template-areas: 'student navigation';
+        grid-template-rows: auto;
+        grid-template-columns: 500px;
+        position: relative;
+        align-items: center;
+        grid-gap: 0;
+        padding: 0;
+    }
+    .profilePhoto {
+        height: auto;
+        width: 100%;
+        max-width: 400px;
+        margin: 50px 0 0;
+    }
+    .bgCurve {
+        height: 125px;
+        left: 0;
+        bottom: 0;
+    } 
+    .mainBackground {
+        transform: translateY(-50%, 0% );
+    }
+    .bgPattern {
+        height: 465px;
+        width: 430px;
+    }
+    .student {
+        grid-area: student;
+        position: absolute;
+        text-align: left;
+        width: 550px;
+        z-index: 2;
+        left: 25px;
+    }
+    .quote {
+        margin: 100px 0 0;
+        text-align: left;
+        z-index: 2;
+        width: 485px;
+        padding: 0 25px 15px;
+    }
+    .quote::before {
+        height: 100px;
+        width: 125px;
+        transform: translate(-105%, -65%);
+    }
+    .buttons {
+        left: 25px;
+        bottom: -2px;
+    }
+    .job {
+        text-align: left;
+        margin: 0 0 0 10px;
+    }
+    .info {
+        display: flex;
+        padding: 0 25px ;
 
+        /* justify-content: space-around; */
+    }
+}
+/* @media only screen and (min-width: 1440px) {
+    
+    .mainBackground {
+        transform: translateY(0%);
+    }
+    .bgPattern {
+        height: 465px;
+        width: 465px;
+    }
 } */
